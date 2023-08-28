@@ -1,0 +1,190 @@
+<html>
+    <head>
+
+        <style>
+      .a{
+        width:100%;
+        height:550px;
+        float:left;
+        background-image:linear-gradient(to right,rgb(61, 3, 47),rgb(157, 9, 93));
+      }
+      .b{
+        width:40%;
+        height:400px;
+        float:left;
+        margin-top:80px;
+        margin-left:30%;
+        background-color:bisque;
+        border-radius:20px;
+        box-shadow:7px 7px 7px black;
+      }
+      .c{
+        width:30%;
+        height:40px;
+        float:left;
+        background-color: bisque;
+      }
+      .d{
+        width:70%;
+        height:40px;
+        float:left;
+        background-color: bisque;
+      }
+      .head{
+        margin-left:15px;
+      }
+      .img{
+        margin-top:10px;
+        margin-left:0%;
+        border-radius:360px;
+      }
+      .txt{
+        flex:1;
+        border:none;
+        outline:none;
+        background:transparent;
+        padding:10px;
+        font-size:17px;
+        
+
+      }
+      .butt{
+      border:none;
+      outline:none;
+      background-color: red;
+      color:white;
+      border-radius:30px;
+      padding:16px 50px;
+      font-size:16px;
+      cursor:pointer;
+      }
+
+      .upper{
+        width:100%;
+        height:50px;
+        float:left;
+       
+      }
+      .e{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        border-radius:30px;
+        background:white;
+        padding-left:20px;
+        margin-bottom:25px;
+        margin-top:70px;
+
+       
+      }
+       .item1{
+          color:black;
+          text-decoration:line-through;
+       }
+       .item1::before{
+        background-image: url('c:/Users/HP/Downloads/webde/download (9).png');
+       }
+          
+        ul li{
+          list-style:none;
+          font-size:20px;
+          padding:12px 8px 12px 20px;
+          position:relative;
+          user-select:none;
+          cursor:pointer;
+          
+      }
+      ul li::before{
+         content:''; 
+         position:absolute; 
+        height:25px;
+        width:25px;
+        border-radius: 360px;
+        background-image: url('c:/Users/HP/Downloads/webde/download (8).png');
+        background-repeat: no repeat;
+        background-size:cover;
+        left:-5%;
+      
+      }
+      ul li span{
+        position:absolute;
+        height:40px;
+        width:40px;
+        font-size:23px;
+        right:0px;
+        color:black;
+        text-align:center;
+        border-radius:360px;
+        
+      }
+
+     
+        </style>
+    </head>
+
+    <body>
+        <div class="a">
+        <div class="b">
+        <div class="upper">
+      <div class="c"><h2 class="head">To do List</h2></div>
+      <div class="d"><img src="c:/Users/HP/Downloads/webde/todo.jpg" width="40px" height="40px" class="img"></div>
+       </div>
+       <div class="e">
+        <input type="text" id="t1" placeholder="Add new works in your List" class="txt">
+        <input type="button" value="ADD" class="butt" onclick="addNew()">
+      </div>
+       <ul id="listitems">
+        <!-- <li class="item1">Task 1</li>
+        <li>Task 2</li>
+        <li>Task 3</li> -->
+       
+      </ul>  
+
+     
+    </div>
+        </div>
+         
+        <script>
+          const a = document.getElementById("t1");
+          const b = document.getElementById("listitems");
+
+          function addNew(){
+              if(a.value === ''){
+                alert("empty text! write anything");
+              }
+              else{
+                let li = document.createElement('li');
+                li.innerHTML = a.value;
+                b.appendChild(li);
+                let span=document.createElement("span");
+                span.innerHTML = "\u00d7";
+                li.appendChild(span);
+              }
+               a.value = "";
+               newdata();
+          }
+
+          b.addEventListener("click",function(g){
+            if(g.target.tagName === "LI"){
+              g.target.classList.toggle("item1");
+              newdata();
+            }
+            else if(g.target.tagName === "SPAN"){
+              g.target.parentElement.remove();
+              newdata();
+            }
+          },false);
+
+          function newdata(){
+          localStorage.setItem("data",b.innerHTML);
+           }
+
+           function displaytask(){
+            b.innerHTML= localStorage.getItem("data");
+           }
+
+           displaytask();
+        </script>
+             
+    </body>
+</html>
